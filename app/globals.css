@@ -48,5 +48,8 @@
 .chart-point { outline: none; }
 .chart-point:focus-visible circle, .chart-point:focus-visible polygon { stroke-width: 4px; }
 
+@keyframes load-bar { from { transform: translateX(-100%); } to { transform: translateX(300%); } }
+.load-bar { animation: load-bar 1.1s ease-in-out infinite; }
+
 @keyframes caret { 50% { opacity: 0; } }
 .caret { animation: caret 1s steps(1) infinite; }

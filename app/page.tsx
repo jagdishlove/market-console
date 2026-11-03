@@ -1,6 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { Dashboard } from "@/components/dashboard/dashboard";
+import { PageLoading } from "@/components/ui/page-loading";
 import { datasetQuery } from "@/lib/dataset-query";
 import { dataset } from "@/lib/server-data";
 
@@ -10,7 +11,7 @@ export default function Page() {
   client.setQueryData(datasetQuery.queryKey, dataset);
   return (
     <HydrationBoundary state={dehydrate(client)}>
-      <Suspense fallback={<p className="p-6 text-muted">Loading…</p>}>
+      <Suspense fallback={<PageLoading />}>
         <Dashboard />
       </Suspense>
     </HydrationBoundary>
