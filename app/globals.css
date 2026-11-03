@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* design tokens */
+:root {
+  --canvas: 244 246 249;
+  --surface: 255 255 255;
+  --line: 217 222 230;
+  --ink: 15 23 42;
+  --muted: 84 94 112;
+  --accent: 29 78 216;
+  --ai: 109 40 217;
+  --ai-soft: 245 243 255;
+  --good: 21 128 61;
+  --warn: 161 72 8;
+  --bad: 185 28 28;
+}
+
+@layer base {
+  html { color-scheme: light; }
+  body { @apply bg-canvas text-ink antialiased; font-feature-settings: "tnum"; }
+  :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 2px; border-radius: 2px; }
+  button, select, input, textarea { font: inherit; }
+}
+
+@layer components {
+  .card { @apply rounded-lg border border-line bg-surface; }
+  .btn { @apply inline-flex items-center gap-1.5 rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-medium hover:bg-canvas disabled:opacity-50; }
+  .btn-primary { @apply border-accent bg-accent text-white hover:bg-accent/90; }
+  .input { @apply w-full rounded-md border border-line bg-surface px-2.5 py-1.5 text-sm aria-[invalid=true]:border-bad; }
+  
+  .chev { @apply appearance-none bg-no-repeat pr-8; background-position: right 0.6rem center; background-size: 0.8rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23545e70' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E"); }
+  summary.chev { @apply list-none; }
+  summary.chev::-webkit-details-marker { display: none; }
+  .label { @apply mb-1 block text-xs font-medium text-muted; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+.map-country { outline: none; transition: opacity 120ms, filter 120ms; }
+.map-country:hover, .map-country:focus-visible { filter: brightness(0.9) saturate(1.2); }
+.map:has(.map-country:hover) .map-country:not(:hover) { opacity: 0.55; }
+
+.chart-point { outline: none; }
+.chart-point:focus-visible circle, .chart-point:focus-visible polygon { stroke-width: 4px; }
+
+@keyframes caret { 50% { opacity: 0; } }
+.caret { animation: caret 1s steps(1) infinite; }
